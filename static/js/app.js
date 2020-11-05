@@ -1,7 +1,9 @@
 
 // Google Mobility Plotly Chart Selected By State
 
-Plotly.d3.json('./data/Merged_data.json', function (err, rows) {
+const url = "/api/data";
+
+Plotly.d3.json(url, function (err, rows) {
 
   console.log(rows)
 
@@ -10,10 +12,10 @@ Plotly.d3.json('./data/Merged_data.json', function (err, rows) {
   }
 
   function byState(state) {
-    return rows.filter(function (row) { return row.states === state; });
+    return rows.filter(function (row) { return row[0] === state; });
   }
   //1. get all the states from json  
-  var statesArray = rows.map(function (row) { return row.states; }); //all states, but with duplicates
+  var statesArray = rows.map(function (row) { return row[0]; }); //all states, but with duplicates
   var stateSet = new Set(statesArray); //remove all duplicates!!!!
   var uniqueStates = Array.from(stateSet); //convert back into an array
 
@@ -44,53 +46,55 @@ Plotly.d3.json('./data/Merged_data.json', function (err, rows) {
   // im adding the state as a value the function takes, 
   // and use it in the title, so wiht each plot the title will change
   // **********
+  console.log(unpack(rows, 1))
+  console.log(unpack(rows, 2))
   function drawPlot(rows, state) {
     var trace1 = {
       type: "scatter",
       mode: "lines",
       name: 'Retail & Recreation',
-      x: unpack(rows, 'dates'),
-      y: unpack(rows, 'SMA_retail_recreation'),
+      x: unpack(rows, 1),
+      y: unpack(rows, 2),
       line: { color: '#00CED1' }
     }
     var trace2 = {
       type: "scatter",
       mode: "lines",
       name: 'Parks',
-      x: unpack(rows, 'dates'),
-      y: unpack(rows, 'SMA_parks'),
+      x: unpack(rows, 1),
+      y: unpack(rows, 4),
       line: { color: '#708090' }
     }
     var trace3 = {
       type: "scatter",
       mode: "lines",
       name: 'Grocery & Pharmacy',
-      x: unpack(rows, 'dates'),
-      y: unpack(rows, 'SMA_grocery_pharmacy'),
+      x: unpack(rows, 1),
+      y: unpack(rows, 3),
       line: { color: '#FF7F50' }
     }
     var trace4 = {
       type: "scatter",
       mode: "dotted-lines",
       name: 'Transit',
-      x: unpack(rows, 'dates'),
-      y: unpack(rows, 'SMA_transit'),
+      x: unpack(rows, 1),
+      y: unpack(rows, 5),
       line: { color: '#00FF00' }
     }
     var trace5 = {
       type: "scatter",
       mode: "dotted-lines",
       name: 'Workplaces',
-      x: unpack(rows, 'dates'),
-      y: unpack(rows, 'SMA_workplaces'),
+      x: unpack(rows, 1),
+      y: unpack(rows, 6),
       line: { color: '#9932CC' }
     }
     var trace6 = {
       type: "scatter",
       mode: "dotted-lines",
       name: 'Residential',
-      x: unpack(rows, 'dates'),
-      y: unpack(rows, 'SMA_residential'),
+      x: unpack(rows, 1),
+      y: unpack(rows, 7),
       line: { color: '#C71585' }
     }
     var data = [trace1, trace2, trace3, trace4, trace5, trace6];
@@ -175,7 +179,7 @@ Plotly.d3.json('./data/Merged_data.json', function (err, rows) {
         console.log(value1)
         // value1 is the name of the state in a string
         // The byState function filters the data by state ...return rows.filter(function (row) { return row.states === state; })
-        // drawPlot, simply draws the plot fit the filtered data
+        // drawPlot, simply draws the plot with the filtered data
         drawPlot(byState(value1), value1);
         drawPlotSBrevenu(byState(value1), value1);
         drawPlotCovid(byState(value1), value1);
@@ -205,8 +209,8 @@ Plotly.d3.json('./data/Merged_data.json', function (err, rows) {
       type: "scatter",
       mode: "lines",
       name: 'Small Business Revenu',
-      x: unpack(rows, 'dates'),
-      y: unpack(rows, 'revenue_all'),
+      x: unpack(rows, 1),
+      y: unpack(rows, 10),
       line: { color: '#00CED1' }
     }
     var data = [trace1];
@@ -223,16 +227,16 @@ Plotly.d3.json('./data/Merged_data.json', function (err, rows) {
   function drawPlotCovid(rows, state) {
 
     var trace1 = {
-      x: unpack(rows, 'dates'),
-      y: unpack(rows, 'new_case_count'),
+      x: unpack(rows, 1),
+      y: unpack(rows, 9),
       name: 'Daily Covid Cases',
       marker: { color: 'rgb(55, 83, 109)' },
       type: 'bar'
     };
 
     var trace2 = {
-      x: unpack(rows, 'dates'),
-      y: unpack(rows, 'case_count'),
+      x: unpack(rows, 1),
+      y: unpack(rows, 8),
       name: 'Total Covid Case Count',
       marker: { color: 'rgb(26, 118, 255)' },
       type: 'bar'
