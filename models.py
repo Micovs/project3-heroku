@@ -15,6 +15,7 @@ def create_classes(db):
         new_case_count = db.Column(db.Float)
         revenue_all = db.Column(db.Float)
         revenue_ss60 = db.Column(db.Float)
+        deaths = db.Column(db.Float)
 
         def __repr__(self):
             return '<Mobility %r>' % (self.states)

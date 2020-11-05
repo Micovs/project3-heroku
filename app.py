@@ -30,19 +30,32 @@ Mobility = create_classes(db)
 # create route that renders index.html template
 @app.route("/")
 def home():
-
-
+    
     return render_template("index.html")
-
-
 
 @app.route("/api/data")
 def data():
 
     # df=pd.read_sql
-    receiveddata = db.session.query(Mobility.states, Mobility.dates, Mobility.sma_retail_recreation, Mobility.sma_grocery_pharmacy, Mobility.sma_parks, Mobility.sma_transit, Mobility.sma_workplaces, Mobility.sma_residential, Mobility.case_count, Mobility.new_case_count, Mobility.revenue_all, Mobility.revenue_ss60).all()
+    receiveddata = db.session.query(Mobility.states, Mobility.dates, Mobility.sma_retail_recreation, Mobility.sma_grocery_pharmacy, Mobility.sma_parks, Mobility.sma_transit, Mobility.sma_workplaces, Mobility.sma_residential, Mobility.case_count, Mobility.new_case_count, Mobility.revenue_all, Mobility.revenue_ss60, Mobility.deaths).all()
 
     return jsonify(receiveddata)
 
+
+# Creating routes for the rest of the pages
+@app.route("/comparison")
+def comparison():
+    return render_template("comparison.html")  
+
+@app.route("/tweets")
+def tweets():
+    return render_template("tweets.html") 
+
+@app.route("/google")
+def google():
+    return render_template("google.html") 
+
+
 if __name__ == "__main__":
     app.run()
+
