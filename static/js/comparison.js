@@ -1,17 +1,20 @@
 
    // Google Mobility Plotly Chart Selected By State
 
-Plotly.d3.json('./data/data_us.json', function (err, rows) {
+const url = "/api/data";   
 
+Plotly.d3.json(url, function (err, rows) {
+
+    console.log(rows)
     function unpack(rows, key) {
         return rows.map(function (row) { return row[key]; });
     }
 
     function byState(state) {
-        return rows.filter(function (row) { return row.states === state; });
+        return rows.filter(function (row) { return row[0] === state; });
     }
     //1. get all the states from json  
-    var statesArray = rows.map(function(row){ return row.states; }); //all states, but with duplicates
+    var statesArray = rows.map(function(row){ return row[0]; }); //all states, but with duplicates
     var stateSet = new Set(statesArray); //remove all duplicates!!!!
     var uniqueStates = Array.from(stateSet); //convert back into an array
 
@@ -39,48 +42,48 @@ Plotly.d3.json('./data/data_us.json', function (err, rows) {
             type: "scatter",
             mode: "lines",
             name: 'Retail & Recreation',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_retail_recreation'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 2),
             line: { color: '#00CED1' }
         }
         var trace2 = {
             type: "scatter",
             mode: "lines",
             name: 'Parks',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_parks'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 4),
             line: { color: '#708090'}
         }
         var trace3 = {
             type: "scatter",
             mode: "lines",
             name: 'Grocery & Pharmacy',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_grocery_pharmacy'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 3),
             line: { color: '#FF7F50' }
         }
         var trace4 = {
             type: "scatter",
             mode: "dotted-lines",
             name: 'Transit',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_transit'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 5),
             line: { color: '#00FF00' }
         }
         var trace5 = {
             type: "scatter",
             mode: "dotted-lines",
             name: 'Workplaces',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_workplaces'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 6),
             line: { color: '#9932CC'}
         }
         var trace6 = {
             type: "scatter",
             mode: "dotted-lines",
             name: 'Residential',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_residential'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 7),
             line: { color: '#C71585' }
         }
         var data = [trace1, trace2, trace3, trace4, trace5, trace6];
@@ -95,17 +98,17 @@ Plotly.d3.json('./data/data_us.json', function (err, rows) {
 
 // Google Mobility Plotly Chart 2 Selected By State
 
-Plotly.d3.json('./data/data_us.json', function (err, rows) {
+Plotly.d3.json(url, function (err, rows) {
 
     function unpack(rows, key) {
         return rows.map(function (row) { return row[key]; });
     }
 
     function byState(state) {
-        return rows.filter(function (row) { return row.states === state; });
+        return rows.filter(function (row) { return row[0] === state; });
     }
     //1. get all the states from json  
-    var statesArray = rows.map(function(row){ return row.states; }); //all states, but with duplicates
+    var statesArray = rows.map(function(row){ return row[0]; }); //all states, but with duplicates
     var stateSet = new Set(statesArray); //remove all duplicates!!!!
     var uniqueStates = Array.from(stateSet); //convert back into an array
 
@@ -133,48 +136,48 @@ Plotly.d3.json('./data/data_us.json', function (err, rows) {
             type: "scatter",
             mode: "lines",
             name: 'Retail & Recreation',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_retail_recreation'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 2),
             line: { color: '#00CED1' }
         }
         var trace2 = {
             type: "scatter",
             mode: "lines",
             name: 'Parks',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_parks'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 4),
             line: { color: '#708090'}
         }
         var trace3 = {
             type: "scatter",
             mode: "lines",
             name: 'Grocery & Pharmacy',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_grocery_pharmacy'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 3),
             line: { color: '#FF7F50' }
         }
         var trace4 = {
             type: "scatter",
             mode: "dotted-lines",
             name: 'Transit',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_transit'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 5),
             line: { color: '#00FF00' }
         }
         var trace5 = {
             type: "scatter",
             mode: "dotted-lines",
             name: 'Workplaces',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_workplaces'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 6),
             line: { color: '#9932CC'}
         }
         var trace6 = {
             type: "scatter",
             mode: "dotted-lines",
             name: 'Residential',
-            x: unpack(rows, 'dates'),
-            y: unpack(rows, 'SMA_residential'),
+            x: unpack(rows, 1),
+            y: unpack(rows, 7),
             line: { color: '#C71585' }
         }
         var data = [trace1, trace2, trace3, trace4, trace5, trace6];
@@ -190,18 +193,18 @@ Plotly.d3.json('./data/data_us.json', function (err, rows) {
 
  // COVID Cases & Death Chart Selected By State
 
- Plotly.d3.json('./data/covid_states.json', function(err, rows){
+ Plotly.d3.json(url, function(err, rows){
 
     function unpack(rows, key) {
         return rows.map(function (row) { return row[key]; });
     }
   
       function byState(state){
-        return rows.filter(function(row){ return row.state === state; });
+        return rows.filter(function(row){ return row[0] === state; });
     }
       
 //1. get all the states from json
-var statesArray = rows.map(function(row){ return row.state; }); //all states, but with duplicates
+var statesArray = rows.map(function(row){ return row[0]; }); //all states, but with duplicates
 var stateSet = new Set(statesArray); //remove all duplicates!!!!
 var uniqueStates = Array.from(stateSet); //convert back into an array
   
@@ -229,8 +232,8 @@ function drawPlot(rows){
         type: "scatter",
         mode: "lines",
         name: 'Cases',
-        x: unpack(rows, 'date'),
-        y: unpack(rows, 'cases'),
+        x: unpack(rows, 1),
+        y: unpack(rows, 8),
         line: { color: '#17BECF' }
     }
 
@@ -238,15 +241,19 @@ function drawPlot(rows){
         type: "scatter",
         mode: "lines",
         name: 'Deaths',
-        x: unpack(rows, 'date'),
-        y: unpack(rows, 'deaths'),
+        x: unpack(rows, 1),
+        y: unpack(rows, 12),
         line: { color: '#9932CC' }
     }
    
     var data = [trace1, trace2];
 
     var layout = {
-        title: 'U.S COVID Cases & Deaths',
+        title: 'U.S COVID Cases & Deaths, logarithmic',
+        yaxis: {
+            type: 'log',
+            autorange: true
+          }
     };
 
     Plotly.newPlot('myDiv3', data, layout);
@@ -257,18 +264,18 @@ function drawPlot(rows){
 //  Chart 4 COVID
 // COVID Cases & Death Chart Selected By State
 
-Plotly.d3.json('./data/covid_states.json', function(err, rows){
+Plotly.d3.json(url, function(err, rows){
 
     function unpack(rows, key) {
         return rows.map(function (row) { return row[key]; });
     }
   
       function byState(state){
-        return rows.filter(function(row){ return row.state === state; });
+        return rows.filter(function(row){ return row[0] === state; });
     }
       
 //1. get all the states from json
-var statesArray = rows.map(function(row){ return row.state; }); //all states, but with duplicates
+var statesArray = rows.map(function(row){ return row[0]; }); //all states, but with duplicates
 var stateSet = new Set(statesArray); //remove all duplicates!!!!
 var uniqueStates = Array.from(stateSet); //convert back into an array
   
@@ -296,8 +303,8 @@ function drawPlot(rows){
         type: "scatter",
         mode: "lines",
         name: 'Cases',
-        x: unpack(rows, 'date'),
-        y: unpack(rows, 'cases'),
+        x: unpack(rows, 1),
+        y: unpack(rows, 8),
         line: { color: '#17BECF' }
     }
 
@@ -305,8 +312,8 @@ function drawPlot(rows){
         type: "scatter",
         mode: "lines",
         name: 'Deaths',
-        x: unpack(rows, 'date'),
-        y: unpack(rows, 'deaths'),
+        x: unpack(rows, 1),
+        y: unpack(rows, 12),
         line: { color: '#9932CC' }
     }
    
