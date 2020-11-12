@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>COVID Data</title>
+  <title>Pet Adoption</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/superhero/bootstrap.min.css"
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;669&display=swap" rel="stylesheet">
   <!--CSS Link -->
-  <link rel="stylesheet" href="../static/css/homepage.css">
+  <link rel="stylesheet" href="../static/css/pets.css">
 </head>
 
 <body>
@@ -51,7 +51,7 @@
 
   <!-- Content -->
   <div class="hero text-center">
-    <h1>COVID Data</h1>
+    <h2>Pet Adoption</h2>
   </div>
 
   <!-- Creates the Overall Grid -->
@@ -61,67 +61,54 @@
     <div class="col-lg-12">
       <div class="card mt-5">
         <div class="card-body">
-          <p>In early 2020, the coronavirus and accompanying COVID-19 disease changed our world and daily habits. These interactive charts show the many changes related to how people live and move around in each state along with state covid cases counts and the percentage change in small business revenue during the shutdown period</p>
+          <p>As humans learn how to adapt to the new restrictions and changing lifestyles brought about by COVID-19 , pets in the United States continue to be born, surrendered to shelters, and adopted into loving homes. These graphs represent data from 1200 animal welfare organizations around the country and compare weekly data from 2019 and 2020.
+          </p>
         </div>
       </div>
     </div>
-
     <!--First Row Charts -->
     <div class="row">
 
-      <!--First Column in this Row-->
-      <div class="col-lg-6">
+      <!--First Row-->
+      <div class="col-lg-12">
         <div class="box py-2 mt-3 px-0">
-          <h4>Select a State from the Map to compare the data:</h4>
-          <div id="map"></div>
-          <h4>Select a State:</h4>
-          <div id="stateData" class="panel-body">
-            <select id="selDataset"></select>
-          </div>
+          <div id="stacked-plot"></div>
+          <h3></h3>
         </div>
       </div>
 
-      <!--Second Column in this Row-->
-      <div class="col-lg-6">
-        <div class="box py-2 mt-3 px-0">
-          <h3></h3>
-          <div id="myDiv"></div>
-          <h3></h3>
+      <!--Second Row-->
+      <div class="col-lg-12">
+        <div class="box py-2 px-0">
+          <div id="petadoptintake-plot"></div>
         </div>
       </div>
     </div>
 
-    <!--Second Row Charts -->
+    <!-- Third Row Charts -->
     <div class="row">
 
       <!--First Column in this Row-->
-      <div class="col-lg-6">
-        <div class="box py-2 mt-3 pb-5 px-0">
-          <div id="plot-revenue"></div>
+      <div class="col-lg-6 py-5 mb-5 px-0">
+        <div class="box">
+          <div id="piechart1-plot"></div>
+          <h3></h3>
         </div>
       </div>
 
-      <!--Second Column in this Row-->
+      <!--Second Column in the Row-->
       <div class="col-lg-6">
-        <div class="box py-2 mt-3 pb-5 px-0">
-          <div id="plot-covid"></div>
+        <div class="box py-5 mb-5 px-0">
+          <div id="piechart2-plot"></div>
         </div>
       </div>
     </div>
-
   </div>
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <!-- ***** New code, load D3 for the map -->
-  <script src="https://d3js.org/d3.v4.js"></script>
-  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-  <!-- ***** -->
-  <script src="../static/js/app.js"></script>
-  
-
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="../static/js/pets.js"></script>
 </body>
 
 </html>
