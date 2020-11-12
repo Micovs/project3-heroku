@@ -55,6 +55,9 @@ def tweets():
 def google():
     return render_template("google.html") 
 
+@app.route("/pets")
+def google():
+    return render_template("pets.html") 
 
 if __name__ == "__main__":
     app.run()
