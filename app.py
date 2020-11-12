@@ -51,12 +51,12 @@ def comparison():
 def tweets():
     return render_template("tweets.html") 
 
-# @app.route("/google")
-# def google():
-#     return render_template("google.html") 
+@app.route("/google")
+def google():
+    return render_template("google.html") 
 
 @app.route("/pets")
-def google():
+def pets():
     return render_template("pets.html") 
 
 if __name__ == "__main__":
